@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FaLinkedin } from "react-icons/fa";
 
 function Home() {
+  const [showConfirm, setShowConfirm] = useState(false);
   // ----- Typing Effect -----
   const texts = useMemo(
     () => [
@@ -114,10 +115,8 @@ function Home() {
             Connect With Me
           </AnchorLink>
 
-          <a
-            href={resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setShowConfirm(true)}
             className="flex items-center gap-2 px-6 py-3 rounded-2xl border border-gray-600 text-white font-bold shadow-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:scale-105 transition duration-300"
           >
             Resume
@@ -135,7 +134,40 @@ function Home() {
                 d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
               />
             </svg>
-          </a>
+          </button>
+
+          {showConfirm && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-gray-800 border border-gray-700 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl"
+              >
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Download Resume
+                </h3>
+                <p className="text-gray-300 mb-6">
+                  Please download Resume
+                </p>
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setShowConfirm(false)}
+                    className="flex-1 px-4 py-2 rounded-xl border border-gray-600 text-gray-300 hover:bg-gray-700 transition"
+                  >
+                    Cancel
+                  </button>
+                  <a
+                    href={resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-center font-medium hover:from-cyan-500 hover:to-blue-500 transition"
+                  >
+                    Download
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          )}
         </div>
 
         {/* Social Icons */}
