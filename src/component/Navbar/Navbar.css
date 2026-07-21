@@ -1,0 +1,31 @@
+.nav-mob-open {
+  display: none;
+}
+
+.nav-mob-close {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-mob-open {
+    display: block;
+  }
+
+  .nav-menu {
+    transform: translateX(100%);
+  }
+
+  .nav-menu.open {
+    transform: translateX(0);
+  }
+
+  .nav-menu a {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar > div:last-child {
+    margin-left: auto;
+  }
+}

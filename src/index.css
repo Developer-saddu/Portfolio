@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin :0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    background: black;
+    color: white;
+    font-family: 'Helvetica Ne';
+}
+.img{
+    
+  animation: floatImage 2s ease-in-out, floatAgain 8s ease-in-out 2s infinite;
+}
+ @keyframes floatImage {
+     
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2.4rem);
+      }
+    
+  }
+  @keyframes floatAgain {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2.4rem);
+    }
+}
+html {
+  scroll-behavior: smooth;
+}
