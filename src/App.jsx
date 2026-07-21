@@ -8,6 +8,7 @@ import Projects from "./component/Projects/Projects";
 import Footer from "./component/Footer/Footer";
 import Contact from "./component/Contact/Contact";
 import Experience from "./component/Experience/experience";
+import EasterEgg from "./component/EasterEgg";
 
 function App() {
   // Always use dark mode
@@ -34,6 +35,7 @@ function App() {
         <Projects />
         <Contact />
         <Footer />
+        <EasterEgg />
       </div>
     </div>
   );

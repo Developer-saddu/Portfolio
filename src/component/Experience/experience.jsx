@@ -1,9 +1,19 @@
 "use client";
 import { motion } from "framer-motion";
+import { GitCommit, Terminal, AlertTriangle, CheckCircle } from "lucide-react";
+
+const COMMIT_TYPES = {
+  feat: { icon: <CheckCircle className="w-4 h-4" />, color: "text-green-400", label: "FEAT" },
+  fix: { icon: <AlertTriangle className="w-4 h-4" />, color: "text-yellow-400", label: "FIX" },
+  refactor: { icon: <GitCommit className="w-4 h-4" />, color: "text-blue-400", label: "REFACTOR" },
+  chore: { icon: <Terminal className="w-4 h-4" />, color: "text-gray-400", label: "CHORE" },
+};
 
 export default function ExperienceTimeline() {
   const experiences = [
     {
+      id: "a1b2c3d",
+      type: "feat",
       role: "Software Engineer (Full Stack)",
       company: "Kognito Kube Private Limited",
       companyLink: "https://kognitokube.com/",
@@ -32,6 +42,8 @@ export default function ExperienceTimeline() {
       ],
     },
     {
+      id: "e5f6g7h",
+      type: "feat",
       role: "Team Lead | Full Stack Developer",
       company: "KHKR Innovator Tech Solutions",
       companyLink: "https://khkrinnovator.com/",
@@ -56,6 +68,8 @@ export default function ExperienceTimeline() {
       ],
     },
     {
+      id: "i8j9k0l",
+      type: "feat",
       role: "Associate Software Developer",
       company: "Truequations Pvt. Ltd.",
       companyLink: "https://truequations.com/",
@@ -91,72 +105,130 @@ export default function ExperienceTimeline() {
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Heading */}
-        <motion.h2
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-cyan-400 text-center"
+        <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          Experience
-        </motion.h2>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <GitCommit className="w-8 h-8 text-cyan-400" />
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-cyan-400">
+              git log --oneline
+            </h2>
+          </div>
+          <p className="text-gray-400 font-mono text-sm">
+            {"// My professional commit history"}
+          </p>
+        </motion.div>
 
-        {/* Experience Cards */}
+        {/* Experience Timeline */}
         <div className="space-y-6">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-800/50 backdrop-blur-sm p-5 sm:p-6 rounded-2xl border border-gray-700 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
-            >
-              {/* Header */}
-              <div className="mb-4">
-                <h3 className="text-xl sm:text-2xl font-semibold text-cyan-300 mb-1">
-                  {exp.role}
-                </h3>
-                <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-gray-400">
-                  <a
-                    href={exp.companyLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-cyan-400 underline transition-colors"
-                  >
-                    {exp.company}
-                  </a>
-                  <span className="text-gray-600">•</span>
-                  <span className="text-cyan-400">{exp.duration}</span>
+          {experiences.map((exp, index) => {
+            const commitType = COMMIT_TYPES[exp.type] || COMMIT_TYPES.chore;
+            return (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                viewport={{ once: true }}
+                className="relative bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 hover:border-cyan-500/30"
+              >
+                {/* Commit Hash Badge */}
+                <div className="absolute top-4 right-4 font-mono text-xs text-gray-500 bg-gray-900/50 px-2 py-1 rounded">
+                  {exp.id}
                 </div>
-              </div>
 
-              {/* Tech Stack - Compact */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {exp.techStack.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-2.5 py-1 text-xs bg-cyan-900/30 text-cyan-300 rounded-full"
-                  >
-                    {tech}
+                {/* Commit Type Badge */}
+                <div className="flex items-center gap-2 mb-3">
+                  <span className={`${commitType.color}`}>
+                    {commitType.icon}
                   </span>
-                ))}
-              </div>
+                  <span className={`text-xs font-mono font-bold ${commitType.color}`}>
+                    {commitType.label}
+                  </span>
+                </div>
 
-              {/* Description - Compact List */}
-              <ul className="list-none space-y-1.5">
-                {exp.description.map((point, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2 text-gray-300 text-sm"
-                  >
-                    <span className="text-cyan-400 mt-0.5">▹</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+                {/* Header */}
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-cyan-300 mb-1">
+                    {exp.role}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-gray-400">
+                    <a
+                      href={exp.companyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-cyan-400 underline transition-colors"
+                    >
+                      {exp.company}
+                    </a>
+                    <span className="text-gray-600">•</span>
+                    <span className="text-cyan-400 font-mono text-xs">
+                      {exp.duration}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {exp.techStack.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-2.5 py-1 text-xs bg-cyan-900/30 text-cyan-300 rounded-full font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Description */}
+                <ul className="list-none space-y-2">
+                  {exp.description.map((point, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-gray-300 text-sm"
+                    >
+                      <span className="text-cyan-400 mt-0.5 font-mono">▹</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Commit Message Style Footer */}
+                <div className="mt-4 pt-4 border-t border-gray-700/50">
+                  <p className="text-xs text-gray-500 font-mono">
+                    <span className="text-cyan-400">$</span> git commit -m
+                    &quot;Shipped production features at {exp.company.split(" ")[0]}&quot;
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Terminal Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 bg-gray-800/30 backdrop-blur-sm border border-gray-700/30 rounded-xl p-6 font-mono text-sm"
+        >
+          <p className="text-gray-400 mb-2">
+            <span className="text-cyan-400">saddam@portfolio</span>
+            <span className="text-gray-600">:</span>
+            <span className="text-blue-400">~</span>
+            <span className="text-gray-600">$</span> git log --graph
+            --oneline --all
+          </p>
+          <div className="text-xs text-gray-500 space-y-1">
+            <p>* a1b2c3d (HEAD -&gt; main) feat: Leading engineering at Kognito Kube</p>
+            <p>* e5f6g7h feat: Team lead at KHKR Innovator</p>
+            <p>* i8j9k0l feat: Associate SWE at Truequations</p>
+            <p>* 3+ years of clean commits and hotfixes</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

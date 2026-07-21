@@ -26,7 +26,7 @@ export default function Footer() {
         {/* Right: Social Icons */}
         <div className="flex gap-4 text-lg">
           <a
-            href="https://www.linkedin.com/in/saddam-ansari/"
+            href="https://www.linkedin.com/in/saddu-malik/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 bg-white/5 rounded-full hover:bg-blue-500/30 hover:scale-110 transition-all duration-300"

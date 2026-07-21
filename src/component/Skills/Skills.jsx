@@ -201,14 +201,20 @@ export default function Skills() {
                          transition-all duration-300 hover:scale-105
                          shadow-lg hover:shadow-cyan-500/20 cursor-pointer"
             >
-              <div className="flex flex-col items-center justify-center">
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.1 },
+                }}
+                className="flex flex-col items-center justify-center"
+              >
                 <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 transform group-hover:scale-110 transition">
                   {skill.icon || <Layers />}
                 </div>
                 <p className="text-xs sm:text-sm font-semibold text-center group-hover:text-cyan-300">
                   {skill.name}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Shine effect */}
               <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
