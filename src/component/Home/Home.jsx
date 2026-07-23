@@ -209,6 +209,10 @@ function Home() {
         <motion.div
           onMouseEnter={() => setProfileHovered(true)}
           onMouseLeave={() => setProfileHovered(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setProfileHovered((prev) => !prev);
+          }}
           animate={{
             y: profileHovered ? 0 : [0, -8, 0],
             scale: profileHovered ? 1.5 : 1,
@@ -253,6 +257,19 @@ function Home() {
           {"{ }"}
         </motion.div>
       </motion.div>
+
+      {/* Profile Image Backdrop Overlay (for mobile tap-dismiss) */}
+      <AnimatePresence>
+        {profileHovered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-20 bg-black/30 backdrop-blur-sm"
+            onClick={() => setProfileHovered(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Resume Confirm Modal */}
       <AnimatePresence>
