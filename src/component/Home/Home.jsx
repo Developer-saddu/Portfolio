@@ -42,8 +42,7 @@ function Home() {
   return (
     <div
       id="Home"
-      className="flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 px-6 md:px-12 lg:px-24 min-h-screen text-white transition-colors duration-500 relative pt-20 md:pt-0"
-      style={{ paddingTop: "5rem" }}
+      className="flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-12 px-6 md:px-12 lg:px-24 min-h-screen text-white transition-colors duration-500 relative pt-28 md:pt-0"
     >
       {/* Floating decorative code elements */}
       <div className="absolute top-20 left-10 text-cyan-500/10 font-mono text-6xl font-bold select-none pointer-events-none">

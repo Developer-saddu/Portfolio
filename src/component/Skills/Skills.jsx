@@ -110,7 +110,7 @@ const skillCategories = [
       { name: "Casbin", icon: <ShieldCheck className="text-orange-400" /> },
       { name: "Distributed Systems", icon: <Cloud className="text-sky-400" /> },
       { name: "Caching", icon: <Database className="text-yellow-400" /> },
-      { name: "SOLID", icon: <Layers className="text-green-400" /> },
+      { name: "SOLID Principle", icon: <Layers className="text-green-400" /> },
       { name: "Clean Architecture", icon: <Layers className="text-cyan-300" /> },
     ],
   },
