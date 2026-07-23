@@ -19,6 +19,7 @@ function Home() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [currentQuote, setCurrentQuote] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [profileHovered, setProfileHovered] = useState(false);
   const [webviewOpen, setWebviewOpen] = useState(false);
   const [webviewUrl, setWebviewUrl] = useState("");
 
@@ -206,17 +207,21 @@ function Home() {
         {/* Glowing ring effect */}
         <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-blue-500 to-sky-400 rounded-full blur-3xl opacity-30 animate-pulse"></div>
         <motion.div
+          onMouseEnter={() => setProfileHovered(true)}
+          onMouseLeave={() => setProfileHovered(false)}
           animate={{
-            y: [0, -8, 0],
-            rotate: isHovering ? 5 : 0,
-            scale: isHovering ? 1.02 : 1,
+            y: profileHovered ? 0 : [0, -8, 0],
+            scale: profileHovered ? 1.5 : 1,
           }}
           transition={{
             y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: 0.4 },
-            scale: { duration: 0.4 },
+            scale: { duration: 0.4, ease: "easeOut" },
           }}
-          className="relative w-64 sm:w-72 md:w-80 lg:w-96 aspect-square rounded-full overflow-hidden shadow-2xl border-4 border-white/10 backdrop-blur-sm"
+          className={`relative w-64 sm:w-72 md:w-80 lg:w-96 aspect-square overflow-hidden shadow-2xl border-4 backdrop-blur-sm transition-all duration-300 ${
+            profileHovered
+              ? "rounded-2xl z-30 border-cyan-400 shadow-cyan-500/40"
+              : "rounded-full z-10 border-white/10"
+          }`}
           style={{
             background:
               "linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1))",
@@ -227,8 +232,9 @@ function Home() {
             alt="Profile"
             className="object-cover h-full w-full"
           />
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent pointer-events-none"></div>
+          {!profileHovered && (
+            <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent pointer-events-none"></div>
+          )}
         </motion.div>
 
         {/* Floating code badges */}
